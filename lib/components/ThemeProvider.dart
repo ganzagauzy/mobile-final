@@ -14,8 +14,8 @@ class ThemeNotifier with ChangeNotifier {
 
   Future<void> toggleTheme() async {
     _currentTheme =
-        (_currentTheme == primaryTheme) ? secondaryTheme : primaryTheme;
-    await _saveToPrefs(_currentTheme == primaryTheme ? 'yellow' : 'black');
+        (_currentTheme == secondaryTheme) ? primaryTheme : secondaryTheme;
+    await _saveToPrefs(_currentTheme == secondaryTheme ? 'yellow' : 'black');
     notifyListeners();
   }
 
@@ -25,8 +25,8 @@ class ThemeNotifier with ChangeNotifier {
 
   Future<void> _loadFromPrefs() async {
     await _initPrefs();
-    final themeStr = _prefs!.getString(key) ?? 'yellow';
-    _currentTheme = (themeStr == 'black') ? secondaryTheme : primaryTheme;
+    final themeStr = _prefs!.getString(key) ?? 'black';
+    _currentTheme = (themeStr == 'yellow') ? primaryTheme : secondaryTheme;
     notifyListeners();
   }
 
